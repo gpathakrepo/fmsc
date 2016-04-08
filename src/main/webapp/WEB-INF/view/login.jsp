@@ -49,5 +49,8 @@
       </li>
       </label>
       
-      </div>
+      </div><br/><br/>
+      
+        <%@ include file="footer.jsp" %>
+        
 </html>

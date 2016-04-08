@@ -364,7 +364,7 @@
 
         </form>
 
-    </div>
+    </div><br/><br/>
 
 <!--  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -393,6 +393,7 @@
 
 </script>
 -->
+  <%@ include file="footer.jsp" %>
 </body>
 
 </html>
