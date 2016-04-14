@@ -23,7 +23,7 @@ public class HomePageController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homePage(ModelMap map) 
 	{
-		return "confirmation";
+		return "Payment";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
