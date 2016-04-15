@@ -23,7 +23,7 @@ public class HomePageController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homePage(ModelMap map) 
 	{
-		return "Payment";
+		return "Signup";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -38,4 +38,21 @@ public class HomePageController {
 		
 		return "homePage";
 	}
+	
+	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+	public String registerUser(@ModelAttribute(value="signUpBean")User userBean) 
+	{
+		boolean registered = userService.registerUser(userBean);
+		if(registered){
+			
+			return "login";
+		}
+		
+		return "Signup";
+	}
+	
+	
+	
+	
+	
 }

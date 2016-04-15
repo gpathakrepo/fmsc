@@ -2,8 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE HTML>
 <html>
 
@@ -11,7 +10,7 @@
   <title>PhotoArtWork</title>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  
   <!-- stylesheets -->
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <link href="css/dark.css" rel="stylesheet" type="text/css" />
@@ -39,7 +38,7 @@
 
     <!-- begin content -->
     <div id="site_content">
-        <form action="/" method="post">
+        <form  method="post" commandname="signUpBean">
           
           <div class="top-row">
             <div class="field-wrap">
@@ -80,7 +79,7 @@
 		  
 		   
 		  
-          <button type="submit" class="button button-block"/>Get Started</button>
+          <button type="submit" class="button button-block" onclick="submit(this)">Get Started</button>
           
           </form>
        
@@ -102,6 +101,14 @@
     $(document).ready(function() {
       $('ul.sf-menu').sooperfish();
     });
+  </script>
+  <script type="text/javascript">
+    function submit(form)
+    {
+           	
+    	form.action.value ="registerUser";
+    	form.submit();
+    }
   </script>
 </body>
 </html>
