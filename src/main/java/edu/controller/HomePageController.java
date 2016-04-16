@@ -19,40 +19,59 @@ import edu.service.impl.UserServiceImpl;
 public class HomePageController {
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String homePage(ModelMap map) 
-	{
-		return "register";
+	public String homePage(ModelMap map) {
+		return "Home";
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute(value="userBean")User userBean, ModelMap map,HttpServletRequest request,HttpServletResponse response) 
-	{
+	public String login(@ModelAttribute(value = "userBean") User userBean, ModelMap map, HttpServletRequest request,
+			HttpServletResponse response) {
 		User user = userService.login(userBean);
-		if(user != null){
+		if (user != null) {
 			HttpSession session = request.getSession(true);
-			session.setAttribute(userBean.getUserName(), user);
+			session.setAttribute("user", user);
 			return "userProfile";
 		}
-		
+
 		return "homePage";
 	}
-	
+
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	public String registerUser(@ModelAttribute(value="signUpBean")User userBean) 
-	{
+	public String registerUser(@ModelAttribute(value = "signUpBean") User userBean) {
 		boolean registered = userService.registerUser(userBean);
-		if(registered){
-			
+		if (registered) {
+
 			return "login";
 		}
-		
+
 		return "Signup";
 	}
-	
-	
-	
-	
-	
+
+	@RequestMapping(value = "/donate", method = RequestMethod.GET)
+	public String donate( HttpServletRequest request) {
+        String Return = null;
+		HttpSession session = request.getSession(false);
+		if (session == (null) || session.getAttribute("user")==null) {
+			Object userB = session.getAttribute("user");
+			if (userB== null)
+				Return= "redirect:/loginDirect";
+			else 
+				Return= "Donate";
+		} 
+		return Return;
+	}
+
+	@RequestMapping(value = "/singUp", method = RequestMethod.GET)
+	public String singUp(@ModelAttribute(value = "signUpBean") User userBean) {
+
+		return "register";
+	}
+
+	@RequestMapping(value = "/loginDirect", method = RequestMethod.GET)
+	public String loginDirect(@ModelAttribute(value = "signUpBean") User userBean) {
+
+		return "login";
+	}
 }

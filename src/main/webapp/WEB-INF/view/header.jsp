@@ -31,6 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          
           <a class="navbar-brand" href="#">FMSC</a>
         </div>
         <nav role="navigation" class="collapse navbar-collapse navbar-right">
@@ -46,13 +47,14 @@
                 <li><a href="#">All Items</a></li>
               </ul>
             </li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Sign Up</a></li>
-            <li><a href="#">Donate</a></li>
+            <li><a href="/fmsc/loginDirect" >Login</a></li>
+            <li><a href="/fmsc/singUp" >Sign Up</a></li>
+            <li><a href="/fmsc/donate"  >Donate</a></li>
           </ul>
         </nav>
       </div>
    </div>
+
 
 </body>
 </html>
