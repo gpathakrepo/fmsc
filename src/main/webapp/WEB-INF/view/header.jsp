@@ -36,18 +36,8 @@
         </div>
         <nav role="navigation" class="collapse navbar-collapse navbar-right">
           <ul class="navbar-nav nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="dropdown">
-              <a data-toggle="dropdown" href="#" class="dropdown-toggle">Dashboard <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="active"><a href="#">Item 1</a></li>
-                <li><a href="#">Item 2</a></li>
-                <li><a href="#">Item 3</a></li>
-                <li class="divider"></li>
-                <li><a href="#">All Items</a></li>
-              </ul>
-            </li>
-            <li><a href="/fmsc/loginDirect" >Login</a></li>
+            <li><a href="/fmsc/homeDirect">Home</a></li>
+            <li><a href="/fmsc/loginDirect">Login</a></li>
             <li><a href="/fmsc/singUp" >Sign Up</a></li>
             <li><a href="/fmsc/donate"  >Donate</a></li>
           </ul>

@@ -74,4 +74,9 @@ public class HomePageController {
 
 		return "login";
 	}
+	@RequestMapping(value = "/homeDirect", method = RequestMethod.GET)
+	public String homeDirect(@ModelAttribute(value = "signUpBean") User userBean) {
+
+		return "Home";
+	}
 }
