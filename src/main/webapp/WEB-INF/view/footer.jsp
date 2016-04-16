@@ -21,10 +21,10 @@
 
 </head>
 <body>
-<center> <%@ include file="share.jsp" %> </center><br/><br/>
+
 <div class="footer text-center">
         <p>&copy; 2016 FMSC All Rights Reserved. Proudly created by <a href="http://FMSC.com">FMSC.com</a></p> <br/> <br/>
-        
+        <center> <%@ include file="share.jsp" %> </center><br/><br/>
     </div><!-- End Footer -->
  </body>
 
