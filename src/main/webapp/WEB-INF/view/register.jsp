@@ -47,15 +47,16 @@
 				name="name"><br />
 			<br /> <span class="req">Setup A Password</span>* <input
 				type="password" name="password"><br />
-			<br /> <span class="req">Cofirm Password</span>* <input
+			<br /> <span class="req">Confirm Password</span>* <input
 				type="password" name="password"><br />
-			<br /> <input  type="button" value="submit" onclick="registerUser()" />
-
-
-
-
-
-			</label>
+				
+				<li class="form-line" data-type="control_button" id="id_28">
+       	 <div id="cid_28" class="form-input-wide">
+          <div style="margin-left:80px" class="form-buttons-wrapper">
+            <button id="input_28" type="submit" value="submit" class="form-submit-button" onclick="registerUser()">
+				Submit
+				</button>
+		</label>
 
 		</div>
 	</form>
@@ -63,5 +64,7 @@
 	<br />
 </div>
 
-
+ </div><br/><br/>
+      
+        <%@ include file="footer.jsp" %>
 </html>

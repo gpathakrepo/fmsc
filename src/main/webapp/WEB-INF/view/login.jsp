@@ -32,10 +32,10 @@
             <div class="form-row form-input-name-row">
 
       <label>
-                    <span>User Name</span>
+                    <span>User Name</span>*
                     <input type="text" name="name"><br/><br/>
                 
-					<span>Password</span>
+					<span>Password</span>*
                     <input type="password" name="password"><br/><br/>
                     
                     <li class="form-line" data-type="control_button" id="id_28">
@@ -44,13 +44,15 @@
             <button id="input_28" type="submit" class="form-submit-button">
             Submit
             </button>
-          </div>
-        </div>
-      </li>
-      </label>
-      
-      </div><br/><br/>
+          </label>
+
+		</div>
+	</form>
+	<br />
+	<br />
+</div>
+
+ </div><br/><br/>
       
         <%@ include file="footer.jsp" %>
-        
 </html>
