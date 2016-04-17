@@ -64,14 +64,14 @@ public class HomePageController {
 	@RequestMapping(value = "/donate", method = RequestMethod.GET)
 	public String donate( HttpServletRequest request) {
         String Return = null;
-//		HttpSession session = request.getSession(false);
-//		if (session == (null) || session.getAttribute("user")==null) {
-//			Return= "redirect:/loginDirect";
-//		}		
-//		else {
-			// fmscHomePage test
+		HttpSession session = request.getSession(false);
+		if (session == (null) || session.getAttribute("user")==null) {
+			Return= "redirect:/loginDirect";
+		}		
+		else {
+			 
 			Return= "Payment";
-//		} 
+		} 
 		return Return;
 	}
 
