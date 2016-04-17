@@ -1,18 +1,27 @@
 package edu.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="USERS")
-public class User {
-	 	@Id
+public class User implements Serializable{
+	 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+		@Id
 	    @Column(name="USER_ID")
 	    @GeneratedValue
 	    private Integer userId;
@@ -49,6 +58,13 @@ public class User {
 	    
 	    @Column(name="STATE")
 	    private String state;
+		
+		@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
+		private List<Donation> donations ;
+		
+		public User() {
+			donations = new ArrayList<Donation>();
+		}
 
 		public Integer getUserId() {
 			return userId;
@@ -146,7 +162,11 @@ public class User {
 			this.state = state;
 		}
 	    
-//		@ManyToOne
-//		@JoinColumn(name="USER_TYP_ID")
-//		private UserType userType;
+		public List<Donation> getDonations() {
+			return donations;
+		}
+
+		public void setDonations(List<Donation> donations) {
+			this.donations = donations;
+		}
 }

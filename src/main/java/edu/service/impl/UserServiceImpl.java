@@ -35,4 +35,18 @@ public class UserServiceImpl implements UserService{
 		
 		return user;
 	}
+	
+	@Transactional
+	public boolean registerUser(User userBean) {
+		
+		
+		Boolean registered= userDao.registerUser(userBean);
+		
+		if(registered){
+			return true;
+		
+		}
+		
+		return false;
+	}
 }

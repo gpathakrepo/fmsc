@@ -6,4 +6,6 @@ public interface UserDAO {
 
 	public User getUserByUserName(String userName) ;
 
+	public Boolean registerUser(User userBean);
+
 }

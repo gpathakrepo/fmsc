@@ -18,3 +18,7 @@ FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)
 select NAME from PRODUCT where NAME like 'n%';
 
 select * from invoice;
+
+select * from USERS;
+select * from DONATION;
+insert into `USERS` (`USER_ID`, `ADDRESS`, `CITY`, `EMAIL`, `FIRSTNAME`, `LASTNAME`, `MOBILE`, `PASSWORD`, `POSTL_CD`, `STATE`, `TELEPHONE`, `USER_NAME`) values(1, 'address test', 'normal', 'test@gmail.com', 'test fname', 'test lname', '1234567890', 'admin', '61761', 'IL', '1234567890', 'admin')

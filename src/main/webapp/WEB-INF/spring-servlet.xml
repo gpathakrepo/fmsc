@@ -39,10 +39,11 @@
     <!-- Service definition -->
     
     <beans:bean id="userService" class="edu.service.impl.UserServiceImpl"></beans:bean>
-    
+    <beans:bean id="homePageService" class="edu.service.impl.HomePageServiceImpl"></beans:bean>
     
     <!-- DAO definition -->
     <beans:bean id="userDao" class="edu.dao.impl.UserDAOImpl"></beans:bean>
+    <beans:bean id="donationDao" class="edu.dao.impl.DonationDAOImpl"></beans:bean>
     
     <beans:import resource="db-config.xml"/>
 </beans:beans>
