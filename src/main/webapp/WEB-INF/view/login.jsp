@@ -23,7 +23,7 @@
 
         <!-- You only need this form and the form-validation.css -->
 
-        <form class="form-validation" method="post" action="#">
+        <form class="form-validation" method="post" action="login">
 
             <div class="form-title-row">
                 <h1>Login Form</h1>
@@ -33,7 +33,7 @@
 
       <label>
                     <span>User Name</span>*
-                    <input type="text" name="name"><br/><br/>
+                    <input type="text" name="userName"><br/><br/>
                 
 					<span>Password</span>*
                     <input type="password" name="password"><br/><br/>

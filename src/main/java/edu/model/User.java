@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -61,6 +62,9 @@ public class User implements Serializable{
 		
 		@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
 		private List<Donation> donations ;
+		
+		@Transient
+		private String jsonString;
 		
 		public User() {
 			donations = new ArrayList<Donation>();
@@ -168,5 +172,11 @@ public class User implements Serializable{
 
 		public void setDonations(List<Donation> donations) {
 			this.donations = donations;
+		}
+		public String getJsonString() {
+			return jsonString;
+		}
+		public void setJsonString(String jsonString) {
+			this.jsonString = jsonString;
 		}
 }

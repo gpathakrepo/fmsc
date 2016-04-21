@@ -1,5 +1,7 @@
 package edu.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.literals.StringLiterals;
 import edu.model.Donation;
@@ -27,13 +32,13 @@ public class HomePageController {
 	HomePageService homePageService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView homePage(HttpServletRequest request, ModelMap map) 
+	public String homePage(HttpServletRequest request, ModelMap map) 
 	{
 		// fmscHomePage test
 		ModelAndView modelAndView = new ModelAndView("Home");
 		
 
-		return modelAndView;
+		return "redirect:/homeDirect";
 	}
 	
 
@@ -44,10 +49,10 @@ public class HomePageController {
 		if (user != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", user);
-			return "userProfile";
+			return "Home";
 		}
 
-		return "Home";
+		return "login";
 	}
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
@@ -87,9 +92,12 @@ public class HomePageController {
 		return "login";
 	}
 	@RequestMapping(value = "/homeDirect", method = RequestMethod.GET)
-	public String homeDirect(@ModelAttribute(value = "signUpBean") User userBean) {
-
-		return "Home";
+	public ModelAndView homeDirect(@ModelAttribute(value = "signUpBean") User userBean) {
+		ModelAndView modelAndView = new ModelAndView("Home");
+		
+		modelAndView.addObject("jString", homePageService.getAllDonationsString());
+		modelAndView.addObject("totalNoOfMeals", homePageService.getTotalNumberOfMeals());
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/makePayment", method = RequestMethod.POST)
@@ -140,4 +148,5 @@ public class HomePageController {
 		homePageService.saveDonation(donation, user);
 		return "Home";
 	}
+	
 }

@@ -3,14 +3,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-          
-         <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					Number of Meal: <input type="text" readonly="readonly" name="quantity" id="quantity" value="${donation.numberOfMeals}"><br/>
-	            	Total: <input type="text" name="totalPrice" id="totalPrice" readonly="readonly" ><br/>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <%@ include file="header.jsp" %>
+<title>Donate</title>
+	<link rel="stylesheet" href="resources/css/form-validation.css">
+	</head>
+<div class="main-content">
+
+	
+	<form class="form-validation" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	 <div class="form-title-row">
+                <h1>Donate</h1>
+            </div>
+ <br/><br/>
+            <div class="form-row form-input-name-row">
+
+      <label>
+				<span>Number of Meal:</span><input type="text" readonly="readonly" name="quantity" id="quantity" value="${donation.numberOfMeals}"><br/> </br>
+	            <span>Total:</span><input type="text" name="totalPrice" id="totalPrice" readonly="readonly" ><br/>
 	            	
 					<input type="hidden" name="cmd" value="_xclick">
 					<input type="hidden" name="business" value="37842JYHUUEMY">
@@ -27,13 +41,16 @@
 					<input type="hidden" name="return" value="http://localhost:8080/fmsc/successfulDonation">
 					<input type="hidden" name="cancel_return" value="http://localhost:8080/fmsc/cancelDonation">
 					<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-					<input type="hidden" name="notify_url" value="http://localhost:8080/fmsc/txnNotify">
-					<input  type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<input type="hidden" name="notify_url" value="http://localhost:8080/fmsc/txnNotify"><br/><br/>
+					<center><input  type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"></center>
 					
-					<img  alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-					
+					<center><img  alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"></center>
+				</label>	
+				</div>
 				</form>
 </body>
+
+  <%@ include file="footer.jsp" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <script>

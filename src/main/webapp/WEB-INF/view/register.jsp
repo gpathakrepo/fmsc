@@ -40,15 +40,15 @@
 		<div class="form-row form-input-name-row">
 
 			<label>  <span
-				class="req">First Name</span>* <input type="text" name="name"><br />
+				class="req">First Name</span>* <input type="text" name="firstname"><br />
 			<br /> <span class="req">Last Name</span>* <input type="text"
-				name="name"><br />
+				name="lastname"><br />
 			<br /> <span class="req">Username</span>* <input type="text"
-				name="name"><br />
+				name="userName"><br />
 			<br /> <span class="req">Setup A Password</span>* <input
 				type="password" name="password"><br />
 			<br /> <span class="req">Confirm Password</span>* <input
-				type="password" name="password"><br />
+				type="password" name="confirmPassword"><br />
 				
 				<li class="form-line" data-type="control_button" id="id_28">
        	 <div id="cid_28" class="form-input-wide">

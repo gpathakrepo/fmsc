@@ -4,12 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.dao.DonationDAO;
 import edu.dao.UserDAO;
@@ -23,6 +27,37 @@ public class HomePageServiceImpl implements HomePageService {
 	DonationDAO donationDao;
 	@Autowired
 	UserDAO userDao;
+	
+	@Transactional
+	public boolean saveDonation(Donation donation, User user) {
+		user = userDao.getUserByUserName(user.getUserName());
+		
+		donation.setUser(user);
+		user.getDonations().add(donation);
+		donationDao.saveDonation(donation);
+		return false;
+	}
+	@Transactional
+	public String getAllDonationsString() {
+		// TODO Auto-generated method stub
+		List<Donation> donations = donationDao.getAllDonations();
+		String jsonInString = "";
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			jsonInString += mapper.writeValueAsString(donations);
+			
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonInString;
+	}
+	@Transactional
+	public Long getTotalNumberOfMeals() {
+		// TODO Auto-generated method stub
+		Long noOfMeals = donationDao.getTotalNumberOfMeals();
+		
+		return noOfMeals;
+	}
 	public Map<String,String[][]> getFmscHomePageImages(String path){
 		Map<String,String[][]> map = new TreeMap<String, String[][]>();
 		readImages(map, path);
@@ -68,15 +103,4 @@ public class HomePageServiceImpl implements HomePageService {
 	        }
 	   
 	}
-	@Transactional
-	public boolean saveDonation(Donation donation, User user) {
-		if(user == null){
-			user = userDao.getUserByUserName("admin");
-		}
-		donation.setUser(user);
-		user.getDonations().add(donation);
-		donationDao.saveDonation(donation);
-		return false;
-	}
-	
 }
