@@ -58,7 +58,7 @@
 </body>
 <script src="resources/js/jquery.js"></script>
 <form name="jsonForm">
-	${jString} <input type="hidden" value="${jString}" name="jString"
+	<input type="hidden" value="${jString}" name="jString"
 		id="jString"> <input type="hidden" value="${totalNoOfMeals}"
 		name="totalNoOfMeals" id="totalNoOfMeals">
 </form>
