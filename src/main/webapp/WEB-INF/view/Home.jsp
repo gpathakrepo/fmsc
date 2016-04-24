@@ -1,95 +1,176 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
+<script id="data" type="text/json">
+<%=(String) request.getAttribute("jString")%>
+</script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
- 
-  <%@ include file="header.jsp" %>
-  <link rel="stylesheet" href="resources/css/image.css">
-  
+<%@ include file="header.jsp"%>
+<link rel="stylesheet" href="resources/css/image.css">
+
 
 </head>
+
 <body>
 	<div class="jumbotron">
-		<div class="container">
+		<!-- <div class="container">
 			<div class="col-xs-12">
 				<div id="carousel-example-generic" class="carousel slide"
 					data-ride="carousel">
 
-					<!-- Wrapper for slides -->
+					Wrapper for slides
 					<div class="carousel-inner">
-						<div class="item active">
+						<div class="item active"> -->
 							<div id="timg"></div>
-							<canvas id="myCanvas" width="400" height="500"
-								style="border:1px solid #d3d3d3;"> Your browser does
-							not support the HTML5 canvas tag. </canvas>
-							<img id="scream" width="1000" height="1000"
-								src="resources/img/fmsc1.jpg" alt="" 
-								style="visibility: hidden; z-index: -1; position: absolute;">
-
+							
+							<!-- <img id="scream" 
+								src="resources/img/fmsc1.jpg" alt="" usemap="nMap"
+								style="visibility: visible; z-index: -1; position: relative;">
+							<map name="nMap">
+							  <area shape="rect" coords="100,100,100,126" href="sun.htm" alt="Sun">
+							  
+							</map> -->
+							<!-- <img src="resources/img/fmsc1.jpg"  alt="Planets"
+							usemap="#planetmap" style="visibility: hidden; position: absolute;">
+							
+							<map name="planetmap">
+							  <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+							 
+							</map> -->	
+							<div id="myCanvasDiv" style="margin-left: 100px;margin-top: 5px;"><canvas id="myCanvas" width="1000" height="1000"
+								style="border:1px solid #d3d3d3;">
+								
+							</canvas>
+							</div>
 						</div>
-					</div>
+					<!-- </div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 </body>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="resources/js/jquery.js"></script>
 <form name="jsonForm">
-	<input type="hidden" value="${jString}" name="jString"
+	${jString} <input type="hidden" value="${jString}" name="jString"
 		id="jString"> <input type="hidden" value="${totalNoOfMeals}"
 		name="totalNoOfMeals" id="totalNoOfMeals">
 </form>
 <script>
 	$(document).ready(function() {
-
+		
 		var imageObj = new Image();
 		imageObj.src = 'resources/img/fmsc1.jpg';
 		imageObj.width = 1000;
 		imageObj.height = 1000;
-		var canvas = document.getElementById('myCanvas');
-		canvas.width = 1000;
-		canvas.height = 1000;
-		var ctx = canvas.getContext('2d');
-		var totalNoMeals = $("#totalNoOfMeals").val();
+		imageObj.id = "image1";
 		
+		var canvas = document.getElementById('myCanvas');
+		var ctx = canvas.getContext('2d');
+		var canvas1 = document.getElementById('nameCanvas');
+		var ctx1 = canvas.getContext('2d');
+		var totalNoMeals = $("#totalNoOfMeals").val();
 		var imgW = imageObj.width;
 		var imgH = imageObj.height;
 
+		function reOffset(){
+			var BB=canvas.getBoundingClientRect();
+				offsetX=BB.left;
+			  	offsetY=BB.top;        
+			}
+			var offsetX,offsetY;
+			reOffset();
+			window.onscroll=function(e){ reOffset(); }
+			window.onresize=function(e){ reOffset(); }
+		$("#myCanvas").mousemove(function(e){handleMouseMove(e);});
+		$("#myCanvas").mouseout(function(e){$("#reName").html("");});
+		var shapes=[];
+		var offsetTop = 30;
+		var offsetTextTop = 67;
 		imageObj.onload = function() {
-			ctx.drawImage(imageObj, 0, 0);
-			//totalNoMeals = 15100;
-			ctx.fillStyle = "#D3D3D3";
+			canvas.width = imgW;
+			canvas.height = imgH;
+			ctx.fillStyle = ctx.createPattern(this, "no-repeat");
+			totalNoMeals = 10;
+			totalNoMeals = 1500;
 			var noofrow = parseInt(totalNoMeals / imgW);
 			var remaining = totalNoMeals - (noofrow * imgW);
-			/* alert(noofrow);
-			alert(remaining); */
-
-			for (var i = noofrow; i < imgH; i++) {
-				if (i == noofrow) {
-					ctx.fillRect(remaining, i, imgW - remaining, 1);
-				} else {
-					ctx.fillRect(0, i, imgW, 1);
-				}
-
-			}
-			var x = JSON.parse($('#data').html());
-			jQuery.each(x, function(i, val) {
-				//alert(x[i].revealName);
-				//alert(x[i].numberOfMeals);
-			});
+			var j = 1;
+			defineAllShapes();
 		};
+		function defineNames(mouseX,mouseY){
+			var endCoordX = 0; 
+			var endCoordY = 0;
+			var startCoordX = 0;
+			var startCoordY = 0;
+			var q = JSON.parse($('#data').html());
+			ctx.beginPath();
+			ctx.moveTo(0, 0);
+			jQuery.each(q, function(i, val) {
+				endCoordX = parseInt(q[i].numberOfMeals);
+				endCoordY = 1; 
+				ctx.rect(startCoordX,startCoordY,endCoordX,endCoordY);
+				//ctx.rect(10, 10, 100, 100);
+				ctx.fill();
+				ctx.closePath();
+				if(mouseX >= startCoordX  && mouseX <= (endCoordX+startCoordX) && mouseY == (startCoordY )){
+					$("#reName").html(q[i].revealName);
+					return false;
+				}
+				startCoordX += parseInt(endCoordX);
+				if(startCoordX >= 1000){
+					startCoordX = 0;
+					startCoordY += 1; 
+				}
+			});
+			
+		}
+		
+				function defineAllShapes() {
+					var q = JSON.parse($('#data').html());
+					var endCoordX = 0;
+					var endCoordY = 0;
+					var startCoordX = 0;
+					var startCoordY = 0;
+					ctx.beginPath();
+					ctx.moveTo(0, 0);
+					jQuery.each(q, function(i, val) {
+						endCoordX = parseInt(q[i].numberOfMeals);
+						endCoordY = 1; //parseInt(offsetTop);
+						ctx.rect(startCoordX, startCoordY, endCoordX, 1);
+						ctx.fill();
+						ctx.closePath();
+						startCoordX += endCoordX;
+						if (startCoordX >= 1000) {
+							startCoordX = 0;
+							startCoordY += 1;
+						}
+					});
+				}
+				function handleMouseMove(e) {
+					// tell the browser we're handling this event
+					e.preventDefault();
+					e.stopPropagation();
 
-	});
+					mouseX = parseInt(e.clientX - offsetX);
+					mouseY = parseInt(e.clientY - offsetY);
+					defineNames(mouseX, mouseY);
+					if (ctx.isPointInPath(mouseX, mouseY)) {
+						defineNames(mouseX, mouseY);
+					} else {
+						$("#reName").html("");
+					}
+				}
+				
+			});
 </script>
-   <!-- Footer -->
-    <%@ include file="footer.jsp" %>
-    
+<!-- Footer -->
+<%@ include file="footer.jsp"%>
+
 </html>

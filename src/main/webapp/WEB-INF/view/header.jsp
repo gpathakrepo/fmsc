@@ -33,7 +33,9 @@
           </button>
           
           <a class="navbar-brand" href="#">FMSC</a>
+          
         </div>
+        
         <nav role="navigation" class="collapse navbar-collapse navbar-right">
           <ul class="navbar-nav nav">
             <li><a href="/fmsc/homeDirect">Home</a></li>
@@ -42,6 +44,7 @@
             <li><a href="/fmsc/donate"  >Donate</a></li>
           </ul>
         </nav>
+        <div id="reName" ></div>	
       </div>
    </div>
 
