@@ -6,8 +6,34 @@
 <html>
 
 <head>
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript">
 
-	
+    $(document).ready(function (event){
+    	$("#paymentForm").bind('submit', function (e) {
+    		$("#action").val('makePayment');
+    		if($('#resultName').html() !== ""){
+    			e.preventDefault();
+        	    return false;
+    		}
+    	});
+    	//alert();
+    	$("#revealName").keyup(function(e){
+    		$.ajax({
+    		type: 'GET',
+    		contentType: "text/html",
+            url : "checkProfanity?revealName="+$("#revealName").val(),
+            success : function(data) {
+            	$('#resultName').html(data);
+            	
+            },
+            error: function(e){
+            	
+            }
+        });}); 
+    });
+   </script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
  
@@ -33,14 +59,16 @@
  <br/><br/>
             <div class="form-row form-input-name-row">
             	<form:form></form:form>
-            	<form:form action="/makePayment" id="paymentForm"  name="paymentForm" method="post" commandName="donationBean">
-            	<input type="hidden" name="action">
-            	 <label>
+            	<form:form action="" id="paymentForm"  name="paymentForm" method="post" commandName="donationBean">
+            	<input type="hidden" name="action" id="action">
+            	 
                     <span>Reveal Name:</span>*
-					<input type="text" name="revealName" ><br/><br/>
+					<input type="text" name="revealName" id="revealName" ><br/>
+					<span><div style="color: red;" id="resultName"></div></span>
+					<br/><br/>
 	<input type="checkbox" onclick="makeItAnonymus(this)"> <span>Check this box if you want to be anonymous</span><br/><br/> 
 					<span>Donation Location:</span>
-					<select name="payLocation"> <br/><br/>
+					<select name="donationLocation"> <br/><br/>
 <option value="">Please select Donation location</option>					
 <option value="AL">Alabama</option>
 <option value="AK">Alaska</option>

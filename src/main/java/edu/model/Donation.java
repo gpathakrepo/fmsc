@@ -33,6 +33,9 @@ public class Donation implements Serializable{
 	@Column(name="PER_MEAL_PRICE")
 	private double perMealPrice;
 	
+	@Column(name="D_LOC")
+	private String donationLocation;
+	
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private User user;
@@ -66,6 +69,12 @@ public class Donation implements Serializable{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public String getDonationLocation() {
+		return donationLocation;
+	}
+	public void setDonationLocation(String donationLocation) {
+		this.donationLocation = donationLocation;
 	}
 	
 	

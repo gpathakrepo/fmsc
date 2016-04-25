@@ -10,4 +10,5 @@ public interface HomePageService {
 	boolean saveDonation(Donation donation,User user);
 	String getAllDonationsString();
 	Long getTotalNumberOfMeals(); 
+	String checkRevealNameForProfanity(String revealName);
 }

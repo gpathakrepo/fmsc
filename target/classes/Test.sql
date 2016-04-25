@@ -2,6 +2,7 @@ select user0_.USER_ID as USER1_2_, user0_.ADDRESS as ADDRESS2_, user0_.CITY as C
 DELETE FROM donation;
 DELETE FROM users;
 select * from users;
+select * from donation;
 create DATABASE store;
 SHOW DATABASES;
 drop table employee;

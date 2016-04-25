@@ -37,14 +37,14 @@
                 
 					<span>Password</span>*
                     <input type="password" name="password"><br/><br/>
-                    
-                    <li class="form-line" data-type="control_button" id="id_28">
+        </label>            
+                   
        	 <div id="cid_28" class="form-input-wide">
           <div style="margin-left:80px" class="form-buttons-wrapper">
             <button id="input_28" type="submit" class="form-submit-button">
             Submit
             </button>
-          </label>
+        
 
 		</div>
 	</form>

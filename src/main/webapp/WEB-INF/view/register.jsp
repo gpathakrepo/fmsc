@@ -49,22 +49,22 @@
 				type="password" name="password"><br />
 			<br /> <span class="req">Confirm Password</span>* <input
 				type="password" name="confirmPassword"><br />
+			</label>	
 				
-				<li class="form-line" data-type="control_button" id="id_28">
-       	 <div id="cid_28" class="form-input-wide">
-          <div style="margin-left:80px" class="form-buttons-wrapper">
+       	 
+        
             <button id="input_28" type="submit" value="submit" class="form-submit-button" onclick="registerUser()">
 				Submit
 				</button>
-		</label>
+		
 
 		</div>
 	</form>
 	<br />
-	<br />
+	
 </div>
 
- </div><br/><br/>
+ <br/><br/>
       
         <%@ include file="footer.jsp" %>
 </html>

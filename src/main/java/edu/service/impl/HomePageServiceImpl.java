@@ -1,6 +1,7 @@
 package edu.service.impl;
 
 import java.io.File;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,10 +17,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.dao.DonationDAO;
+import edu.dao.ProfanityFilterDAO;
 import edu.dao.UserDAO;
 import edu.model.Donation;
 import edu.model.User;
 import edu.service.HomePageService;
+import isu.ProfanityFilterProxy;
 
 @Service
 public class HomePageServiceImpl implements HomePageService {
@@ -27,6 +30,8 @@ public class HomePageServiceImpl implements HomePageService {
 	DonationDAO donationDao;
 	@Autowired
 	UserDAO userDao;
+	@Autowired
+	ProfanityFilterDAO profanityFilterDao;
 	
 	@Transactional
 	public boolean saveDonation(Donation donation, User user) {
@@ -102,5 +107,13 @@ public class HomePageServiceImpl implements HomePageService {
 				}
 	        }
 	   
+	}
+	public String checkRevealNameForProfanity(String revealName) {
+		int count = profanityFilterDao.getProfanityCountInString(revealName);
+		if(count == 0){
+			return "";
+		}else{
+			return "Reveal Name is not appropriate, please change the name";
+		}
 	}
 }

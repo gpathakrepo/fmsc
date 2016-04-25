@@ -43,6 +43,7 @@
     
     <!-- DAO definition -->
     <beans:bean id="userDao" class="edu.dao.impl.UserDAOImpl"></beans:bean>
+    <beans:bean id="profanityFilterDao" class="edu.dao.impl.ProfanityFilterDAOImpl"></beans:bean>
     <beans:bean id="donationDao" class="edu.dao.impl.DonationDAOImpl"></beans:bean>
     
     <beans:import resource="db-config.xml"/>
