@@ -18,10 +18,44 @@
 
 <script type="text/javascript">
 	function registerUser() {
+		alert();
+		if(validateRegisterForm()){
 		
-		document.register.action = "registerUser";
-		
-		document.register.submit();
+			document.register.action = "registerUser";
+			
+			document.register.submit();
+		}
+	}
+	function validateRegisterForm(){
+		var fname = document.register.firstname.value;
+		var lname = document.register.lastname.value;
+		var email = document.register.email.value;
+		var userName = document.register.userName.value;
+		var pass = document.register.password.value;
+		var conPass = document.register.confirmPassword.value;
+		if(typeof(fname) == 'undefined' || fname == ''){
+			document.getElementById('conPassVal').innerHTML = "* Please Enter First Name<br/><br/>";
+			return false;
+		}else if(typeof(lname) == 'undefined' || lname == ''){
+			document.getElementById('conPassVal').innerHTML = "* Please Enter Last Name<br/><br/>";
+			return false;
+		}else if(typeof(email) == 'undefined' || email == ''){
+			document.getElementById('conPassVal').innerHTML = "* Please Enter Email Address<br/><br/>";
+			return false;
+		}else if(typeof(userName) == 'undefined' || userName == ''){
+			document.getElementById('conPassVal').innerHTML = "* Please Enter User Name<br/><br/>";
+			return false;
+		}else if(typeof(pass) == 'undefined' || pass == ''){
+			document.getElementById('conPassVal').innerHTML = "* Please Enter Password<br/><br/>";
+			return false;
+		}else if(typeof(conPass) == 'undefined' || conPass == ''){
+			document.getElementById('conPassVal').innerHTML = "* Please Enter Confirm Password<br/><br/>";
+			return false;
+		}else if(conPass !== pass){
+			document.getElementById('conPassVal').innerHTML = "* Password and Confirm password must be same<br/><br/>";
+			return false;
+		}
+		return true;
 	}
 </script>
 
@@ -32,18 +66,21 @@
 	<form></form>
 	<form class="form-validation" id="register" name="register" method="post" >
 <input type="hidden" name="action">
-		<div class="form-title-row">
+		<div style="margin-top: 50px;" class="form-title-row">
 			<h1>Sign UP Here</h1>
 		</div>
 		<br />
 		<br />
+		<div style="color: red;" id="conPassVal"></div>
 		<div class="form-row form-input-name-row">
-
+			
 			<label>  <span
 				class="req">First Name</span>* <input type="text" name="firstname"><br />
 			<br /> <span class="req">Last Name</span>* <input type="text"
 				name="lastname"><br />
-			<br /> <span class="req">Username</span>* <input type="text"
+			<br /> <span class="req">Email</span>* <input type="text"
+				name="email"><br />
+			<br /> <span class="req">User Name</span>* <input type="text"
 				name="userName"><br />
 			<br /> <span class="req">Setup A Password</span>* <input
 				type="password" name="password"><br />
@@ -51,9 +88,7 @@
 				type="password" name="confirmPassword"><br />
 			</label>	
 				
-       	 
-        
-            <button id="input_28" type="submit" value="submit" class="form-submit-button" onclick="registerUser()">
+       	     <button id="input_28" type="button" value="submit" class="form-submit-button" onclick="registerUser()">
 				Submit
 				</button>
 		

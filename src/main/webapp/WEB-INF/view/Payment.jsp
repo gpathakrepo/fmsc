@@ -13,12 +13,23 @@
     $(document).ready(function (event){
     	$("#paymentForm").bind('submit', function (e) {
     		$("#action").val('makePayment');
-    		if($('#resultName').html() !== ""){
+    		if($('#resultName').html() !== "" || (typeof($('#resultName').val()) == "undefined" && $('#resultName').val() === "")){
     			e.preventDefault();
         	    return false;
     		}
     	});
-    	//alert();
+    	$("#anonymusCheck").click(function(e){
+    		var checkBox = $("#anonymusCheck");
+    		if(checkBox.is(':checked')) {
+    			$('#resultName').html("");
+    			$("#revealName").val("Anonymous Donor");
+    			$("#revealName").attr("disabled", "disabled"); 
+    		} else { 
+    			$("#revealName").val("");
+    			$("#revealName").removeAttr("disabled"); 
+    			$("#revealName").focus();
+    		}
+    	});
     	$("#revealName").keyup(function(e){
     		$.ajax({
     		type: 'GET',
@@ -58,18 +69,20 @@
             </div>
  <br/><br/>
             <div class="form-row form-input-name-row">
+             <label>
             	<form:form></form:form>
             	<form:form action="" id="paymentForm"  name="paymentForm" method="post" commandName="donationBean">
             	<input type="hidden" name="action" id="action">
-            	 
+            	
                     <span>Reveal Name:</span>*
 					<input type="text" name="revealName" id="revealName" ><br/>
-					<span><div style="color: red;" id="resultName"></div></span>
-					<br/><br/>
-	<input type="checkbox" onclick="makeItAnonymus(this)"> <span>Check this box if you want to be anonymous</span><br/><br/> 
+					<br/>
+					<div style="color: red;margin-left: 185px;" id="resultName"></div>
+				
+	<span><input id="anonymusCheck" type="checkbox" onclick="makeItAnonymus(this)"></span> Check this box if you want to be anonymous<br/><br/> 
 					<span>Donation Location:</span>
 					<select name="donationLocation"> <br/><br/>
-<option value="">Please select Donation location</option>					
+<option value="">Please select donation location</option>					
 <option value="AL">Alabama</option>
 <option value="AK">Alaska</option>
 <option value="AZ">Arizona</option>
@@ -122,12 +135,23 @@
 <option value="WY">Wyoming</option>
 
 					</select><br/><br/>
-					<span>Per Meal price:</span> <input type="text" name="perMealPrice" id="perMealPrice" value="0.22"> <br/><br/>
+					<span>Per Meal price:</span> <input type="text" readonly="readonly" name="perMealPrice" id="perMealPrice" value="0.22"> <br/><br/>
 	            	<span>Number of Meal:</span> <input type="text" name="numberOfMeals" id="quantity" value="10"><br/><br/>
-	            	<span>Total:</span> <input type="text" name="totalPrice" id="totalPrice" ><br/><br/>
+	            	<span>Total:</span> <input type="text" readonly="readonly" name="totalPrice" id="totalPrice" ><br/><br/>
 					<br/>
-					
-					<input type="button" value="Pay" id="payment">
+					</label>
+					<div id="cid_28" class="form-input-wide">
+          <div style="margin-left:80px" class="form-buttons-wrapper">
+					 <input type="button" value="Pay" id="payment" class="form-submit-button">
+					           
+       <!--	 <div id="cid_28" class="form-input-wide">
+          <div style="margin-left:80px" class="form-buttons-wrapper">
+            <button id="input_28" type="button" value="Pay" id="payment" class="form-submit-button">
+            Submit
+            </button>-->
+        
+
+		</div>
 				</form:form>
             
             	<%-- <form:form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -169,6 +193,7 @@
     	});
     	
     });
+	
 	
 </script>
 

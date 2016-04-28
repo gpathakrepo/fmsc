@@ -1,6 +1,6 @@
 select user0_.USER_ID as USER1_2_, user0_.ADDRESS as ADDRESS2_, user0_.CITY as CITY2_, user0_.EMAIL as EMAIL2_, user0_.FIRSTNAME as FIRSTNAME2_, user0_.LASTNAME as LASTNAME2_, user0_.MOBILE as MOBILE2_, user0_.PASSWORD as PASSWORD2_, user0_.POSTL_CD as POSTL9_2_, user0_.STATE as STATE2_, user0_.TELEPHONE as TELEPHONE2_, user0_.USER_NAME as USER12_2_ from USERS user0_ where user0_.USER_NAME='admin'
 DELETE FROM donation;
-DELETE FROM users;
+DELETE FROM users where USER_ID = 7;
 select * from users;
 select * from donation;
 create DATABASE store;
@@ -25,3 +25,5 @@ select * from invoice;
 select * from USERS;
 select * from DONATION;
 insert into `USERS` (`USER_ID`, `ADDRESS`, `CITY`, `EMAIL`, `FIRSTNAME`, `LASTNAME`, `MOBILE`, `PASSWORD`, `POSTL_CD`, `STATE`, `TELEPHONE`, `USER_NAME`) values(1, 'address test', 'normal', 'test@gmail.com', 'test fname', 'test lname', '1234567890', 'admin', '61761', 'IL', '1234567890', 'admin')
+insert into `DONATION` (`D_ID`, `D_LOC`, `NO_OF_MEAL`, `PER_MEAL_PRICE`, `R_NAME`, `USER_ID`) 
+values(4, 'LA', 10000, 0.22, 'ENGINE', 5)

@@ -43,7 +43,10 @@
 							  <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
 							 
 							</map> -->	
-							<div id="myCanvasDiv" style="margin-left: 100px;margin-top: 5px;"><canvas id="myCanvas" width="1000" height="1000"
+							<div style="margin-left: 450px;margin-top: 20px;">Owned image pixels with donor information:</div><br/>
+							<div 
+							style="margin-left: 200px;margin-top: -40px;"  >
+							<canvas id="myCanvas" width="1000" height="1000"
 								style="border:1px solid #d3d3d3;">
 								
 							</canvas>
@@ -71,10 +74,15 @@
 		imageObj.height = 1000;
 		imageObj.id = "image1";
 		
+		var startStyle = "<div class='center' id='reName' >";
+		var endStyle = "</div>";
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
-		var canvas1 = document.getElementById('nameCanvas');
-		var ctx1 = canvas.getContext('2d');
+		/* ctx.save();
+		ctx.globalAlpha=.5;
+		ctx.drawImage(imageObj2, 0, 0); 
+		ctx.restore(); */
+		
 		var totalNoMeals = $("#totalNoOfMeals").val();
 		var imgW = imageObj.width;
 		var imgH = imageObj.height;
@@ -115,21 +123,53 @@
 			jQuery.each(q, function(i, val) {
 				endCoordX = parseInt(q[i].numberOfMeals);
 				endCoordY = 1; 
-				ctx.rect(startCoordX,startCoordY,endCoordX,endCoordY);
-				//ctx.rect(10, 10, 100, 100);
-				ctx.fill();
-				ctx.closePath();
-				if(mouseX >= startCoordX  && mouseX <= (endCoordX+startCoordX) && mouseY == (startCoordY )){
-					$("#reName").html(q[i].revealName);
-					return false;
-				}
-				startCoordX += parseInt(endCoordX);
-				if(startCoordX >= 1000){
-					startCoordX = 0;
-					startCoordY += 1; 
+				if(endCoordX >= 1000){
+					var remain = endCoordX - startCoordX;
+					var numberOfRows = parseInt(endCoordX/1000);
+					var remaining = (endCoordX+startCoordX) - (numberOfRows * 1000);
+					for(var j=1; j <= numberOfRows; j++){
+						
+							ctx.rect(startCoordX,startCoordY,1000,endCoordY);
+							//ctx.rect(10, 10, 100, 100);
+							ctx.fill();
+							ctx.closePath();
+							if(mouseX >= startCoordX  && mouseX <= (endCoordX+startCoordX) && mouseY == (startCoordY )){
+								$("#reName").html(startStyle+q[i].revealName+endStyle);
+								return false;
+							}
+						
+						startCoordX += parseInt(endCoordX);
+						if(startCoordX >= 1000){
+							startCoordX = 0;
+							startCoordY += 1; 
+						}
+					}
+					if(remaining != 0){
+						ctx.rect(startCoordX,startCoordY,remaining,endCoordY);
+						ctx.fill();
+						ctx.closePath();
+						if(mouseX >= startCoordX  && mouseX <= (endCoordX+startCoordX) && mouseY == (startCoordY )){
+							$("#reName").html(q[i].revealName);
+							return false;
+						}
+						startCoordX += parseInt(remaining);
+					}
+				}else {
+					ctx.rect(startCoordX,startCoordY,endCoordX,endCoordY);
+					//ctx.rect(10, 10, 100, 100);
+					ctx.fill();
+					ctx.closePath();
+					if(mouseX >= startCoordX  && mouseX <= (endCoordX+startCoordX) && mouseY == (startCoordY )){
+						$("#reName").html(q[i].revealName);
+						return false;
+					}
+					startCoordX += parseInt(endCoordX);
+					if(startCoordX >= 1000){
+						startCoordX = 0;
+						startCoordY += 1; 
+					}
 				}
 			});
-			
 		}
 		
 				function defineAllShapes() {
@@ -142,14 +182,40 @@
 					ctx.moveTo(0, 0);
 					jQuery.each(q, function(i, val) {
 						endCoordX = parseInt(q[i].numberOfMeals);
-						endCoordY = 1; //parseInt(offsetTop);
-						ctx.rect(startCoordX, startCoordY, endCoordX, 1);
-						ctx.fill();
-						ctx.closePath();
-						startCoordX += endCoordX;
-						if (startCoordX >= 1000) {
-							startCoordX = 0;
-							startCoordY += 1;
+						endCoordY = 1; 
+						if(endCoordX >= 1000){
+							var remain = endCoordX - startCoordX;
+							var numberOfRows = parseInt(endCoordX/1000);
+							var remaining = (endCoordX+startCoordX) - (numberOfRows * 1000);
+							for(var j=1; j <= numberOfRows; j++){
+								
+								ctx.rect(startCoordX,startCoordY,1000,endCoordY);
+								//ctx.rect(10, 10, 100, 100);
+								ctx.fill();
+								ctx.closePath();
+								
+								startCoordX += parseInt(endCoordX);
+								if(startCoordX >= 1000){
+									startCoordX = 0;
+									startCoordY += 1; 
+								}
+							}
+							if(remaining != 0){
+								ctx.rect(startCoordX,startCoordY,remaining,endCoordY);
+								ctx.fill();
+								ctx.closePath();
+								startCoordX += parseInt(remaining);
+							}
+						}else {
+							ctx.rect(startCoordX,startCoordY,endCoordX,endCoordY);
+							//ctx.rect(10, 10, 100, 100);
+							ctx.fill();
+							ctx.closePath();
+							startCoordX += parseInt(endCoordX);
+							if(startCoordX >= 1000){
+								startCoordX = 0;
+								startCoordY += 1; 
+							}
 						}
 					});
 				}

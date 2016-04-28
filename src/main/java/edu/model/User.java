@@ -33,7 +33,7 @@ public class User implements Serializable{
 	    @Column(name="LASTNAME")
 	    private String lastname;
 	    
-	    @Column(name="USER_NAME")
+	    @Column(name="USER_NAME",unique=true)
 	    private String userName;
 	 
 	    @Column(name="EMAIL")

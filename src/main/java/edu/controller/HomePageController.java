@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -124,7 +123,7 @@ public class HomePageController {
 		Donation donation = (Donation) session.getAttribute(StringLiterals.DONATION_LITERAL);
 		User user = (User) session.getAttribute(StringLiterals.USER_LITERAL);
 		homePageService.saveDonation(donation, user);
-		return "Home";
+		return "redirect:/homeDirect";
 	}
 	@RequestMapping(value = "/txnNotify", method = RequestMethod.POST)
 	public String txnNotify(HttpServletRequest request) 

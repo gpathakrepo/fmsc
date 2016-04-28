@@ -1,7 +1,6 @@
 package edu.service.impl;
 
 import java.io.File;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,9 +19,9 @@ import edu.dao.DonationDAO;
 import edu.dao.ProfanityFilterDAO;
 import edu.dao.UserDAO;
 import edu.model.Donation;
+import edu.model.EmailUtility;
 import edu.model.User;
 import edu.service.HomePageService;
-import isu.ProfanityFilterProxy;
 
 @Service
 public class HomePageServiceImpl implements HomePageService {
@@ -39,8 +38,11 @@ public class HomePageServiceImpl implements HomePageService {
 		
 		donation.setUser(user);
 		user.getDonations().add(donation);
-		donationDao.saveDonation(donation);
-		return false;
+		boolean flag = donationDao.saveDonation(donation);
+		if(donationDao.saveDonation(donation)){
+			EmailUtility.sendEmail(user);
+		}
+		return flag;
 	}
 	@Transactional
 	public String getAllDonationsString() {

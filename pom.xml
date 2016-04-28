@@ -19,6 +19,12 @@
     <jackson.version>1.9.10</jackson.version>
   </properties>
   <dependencies>
+	<dependency>
+		<groupId>javax.mail</groupId>
+		<artifactId>mail</artifactId>
+		<version>1.4</version>
+	</dependency>
+  
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

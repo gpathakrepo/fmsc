@@ -13,19 +13,11 @@
 
 	<title>Login to FMSC</title>
 	<link rel="stylesheet" href="resources/css/form-validation.css">
+	</head>
+	 <div class="main-content">
+ <form class="form-validation" method="post" action="login">
 	
-
-</head>
-
-
- 
-    <div class="main-content">
-
-        <!-- You only need this form and the form-validation.css -->
-
-        <form class="form-validation" method="post" action="login">
-
-            <div class="form-title-row">
+            <div style="margin-top: 50px;" class="form-title-row">
                 <h1>Login Form</h1>
             </div>
  <br/><br/>
